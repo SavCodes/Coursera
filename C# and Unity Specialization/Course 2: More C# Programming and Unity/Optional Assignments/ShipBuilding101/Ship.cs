@@ -11,24 +11,9 @@ public class Ship : MonoBehaviour
     // Steering Support
     const int RotationSpeed = 100;
 
-    // Wrapping Support
-    float ScreenLeft;
-    float ScreenRight;
-    float ScreenTop;
-    float ScreenBottom;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Vector3 ScreenTopRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
-        Vector3 ScreenBottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
-
-        ScreenLeft = ScreenBottomLeft.x;
-        ScreenBottom = ScreenBottomLeft.y;    
-        ScreenRight = ScreenTopRight.x;
-        ScreenTop = ScreenTopRight.y;
     }
 
     // Update is called once per frame
@@ -72,31 +57,31 @@ public class Ship : MonoBehaviour
     void ScreenWrap()
     {
 
-        if (transform.position.x < ScreenLeft)
+        if (transform.position.x < ScreenUtils.ScreenLeft)
         {
             Vector2 position = transform.position;
-            position.x = ScreenRight;
+            position.x = ScreenUtils.ScreenRight;
             transform.position = position;
         }
 
-        if (transform.position.x > ScreenRight)
+        if (transform.position.x > ScreenUtils.ScreenRight)
         {
             Vector2 position = transform.position;
-            position.x = ScreenLeft;
+            position.x = ScreenUtils.ScreenLeft;
             transform.position = position;
         }
 
-        if (transform.position.y < ScreenBottom)
+        if (transform.position.y < ScreenUtils.ScreenBottom)
         {
             Vector2 position = transform.position;
-            position.y = ScreenTop;
+            position.y = ScreenUtils.ScreenTop;
             transform.position = position;  
         }
 
-        if (transform.position.y  > ScreenTop)
+        if (transform.position.y  > ScreenUtils.ScreenTop)
         {
             Vector2 position = transform.position;
-            position.y = ScreenBottom;
+            position.y = ScreenUtils.ScreenBottom;
             transform.position = position;
         }
     }
